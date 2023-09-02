@@ -26,9 +26,10 @@ function displayGrid() {
 	// Clears the grid
 	div.replaceChildren();
 
-	for (const book of myLibrary) {
+	for (const [i, book] of myLibrary.entries()) {
 		let card = document.createElement("div");
 		card.classList.add("card")
+		card.dataset.index = i;
 
 		let title = document.createElement("h2");
 		title.innerText = book.title;
@@ -42,16 +43,21 @@ function displayGrid() {
 		let read = document.createElement("p");
 		read.innerText = book.readYet();
 
+		let deleteBtn = document.createElement("button");
+		deleteBtn.innerText = "Remove Book";
+		deleteBtn.addEventListener("click", () => removeBookFromLibrary(i));
+
 		card.appendChild(title);
 		card.appendChild(author);
 		card.appendChild(pages);
 		card.appendChild(read);
+		card.appendChild(deleteBtn);
 
 		div.appendChild(card);
 	}
 }
 
-function dislayeNewBookForm() {
+function displayNewBookForm() {
 	const dialog = document.querySelector("#new-book-dialog");
 	dialog.showModal();
 }
@@ -68,6 +74,11 @@ function createBookFromForm(data) {
 	addBookToLibrary(book);
 }
 
+function removeBookFromLibrary(index) {
+	myLibrary.splice(index, 1);
+	displayGrid();
+} 
+
 let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 addBookToLibrary(theHobbit);
 
@@ -78,7 +89,7 @@ let threeBodyProblem = new Book("The Three Body Problem", "Cixin Liu", 416, true
 addBookToLibrary(threeBodyProblem);
 
 let newBookBtn = document.querySelector('#new-book');
-newBookBtn.addEventListener("click", () => dislayeNewBookForm());
+newBookBtn.addEventListener("click", () => displayNewBookForm());
 
 let closeBtn = document.querySelector('#close');
 closeBtn.addEventListener("click", () => closeNewBookForm());

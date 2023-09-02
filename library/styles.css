@@ -1,0 +1,12 @@
+#library {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+}
+
+.card {
+	border-radius: 8px;
+	box-shadow: 5px 5px 5px -5px black;
+	padding: 16px;
+	border: 1px solid black;
+}

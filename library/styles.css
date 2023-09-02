@@ -16,3 +16,7 @@ input {
 	display: inline-block;
 	margin: 8px;
 }
+
+.read-btn {
+	margin-left: 16px;
+}

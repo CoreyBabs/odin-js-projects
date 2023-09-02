@@ -6,11 +6,14 @@ function Book(title, author, pages, read) {
 	this.pages = pages;
 	this.read = read;
 	this.readYet = function() {
-		return read ? "read" : "not read yet";
+		return this.read ? "read" : "not read yet";
 	}
 	this.info = function() {
 		const ifRead = this.readYet();
 		return `${title} by ${author}, ${pages} pages, ${ifRead}`;
+	}
+	this.readYetInv = function() {
+		return this.read ? "Remove from read" : "Add to read";
 	}
 }
 
@@ -26,6 +29,8 @@ function displayGrid() {
 	// Clears the grid
 	div.replaceChildren();
 
+	console.log(myLibrary.map((b) => b.read));
+
 	for (const [i, book] of myLibrary.entries()) {
 		let card = document.createElement("div");
 		card.classList.add("card")
@@ -40,8 +45,20 @@ function displayGrid() {
 		let pages = document.createElement("p");
 		pages.innerText = `${book.pages} pages`;
 		
+		let readDiv = document.createElement("div");
 		let read = document.createElement("p");
 		read.innerText = book.readYet();
+
+		let readBtn = document.createElement("button");
+		readBtn.innerText = book.readYetInv();
+		readBtn.classList.add("read-btn");
+		readBtn.addEventListener('click', () => { 
+			myLibrary[i].toggleRead();
+			displayGrid();
+		});
+
+		read.appendChild(readBtn);
+		readDiv.appendChild(read);
 
 		let deleteBtn = document.createElement("button");
 		deleteBtn.innerText = "Remove Book";
@@ -50,7 +67,7 @@ function displayGrid() {
 		card.appendChild(title);
 		card.appendChild(author);
 		card.appendChild(pages);
-		card.appendChild(read);
+		card.appendChild(readDiv);
 		card.appendChild(deleteBtn);
 
 		div.appendChild(card);
@@ -102,3 +119,7 @@ form.addEventListener("submit", (e) => {
 	createBookFromForm(fd);
 	closeNewBookForm();
 });
+
+Book.prototype.toggleRead = function() {
+	this.read = !this.read;
+}

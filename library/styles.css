@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 12px;
+	margin-top: 8px;
 }
 
 .card {
@@ -9,4 +10,9 @@
 	box-shadow: 5px 5px 5px -5px black;
 	padding: 16px;
 	border: 1px solid black;
+}
+
+input {
+	display: inline-block;
+	margin: 8px;
 }

@@ -22,11 +22,11 @@ function addBookToLibrary(book) {
 // Rerender the whole grid, this could probably be smarter, like appending to the grid when adding a book
 function displayGrid() {
 	let div = document.querySelector("#library");
+	
 	// Clears the grid
-	div.innerHTML = '';
+	div.replaceChildren();
 
 	for (const book of myLibrary) {
-		console.log(book);
 		let card = document.createElement("div");
 		card.classList.add("card")
 
@@ -51,6 +51,22 @@ function displayGrid() {
 	}
 }
 
+function dislayeNewBookForm() {
+	const dialog = document.querySelector("#new-book-dialog");
+	dialog.showModal();
+}
+
+function closeNewBookForm() {
+	const dialog = document.querySelector("#new-book-dialog");
+	const form = document.querySelector('#new-book-form');
+	dialog.close();
+	form.reset();
+}
+
+function createBookFromForm(data) {
+	const book = new Book(data.get("title"), data.get("author"), data.get("pages"), data.has("read"));
+	addBookToLibrary(book);
+}
 
 let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 addBookToLibrary(theHobbit);
@@ -60,3 +76,18 @@ addBookToLibrary(chamberOfSecrets);
 
 let threeBodyProblem = new Book("The Three Body Problem", "Cixin Liu", 416, true);
 addBookToLibrary(threeBodyProblem);
+
+let newBookBtn = document.querySelector('#new-book');
+newBookBtn.addEventListener("click", () => dislayeNewBookForm());
+
+let closeBtn = document.querySelector('#close');
+closeBtn.addEventListener("click", () => closeNewBookForm());
+
+let form = document.querySelector('#new-book-form');
+form.addEventListener("submit", (e) => {
+	e.preventDefault();
+	const fd = new FormData(form);
+	console.log(fd);
+	createBookFromForm(fd);
+	closeNewBookForm();
+});

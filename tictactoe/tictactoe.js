@@ -51,8 +51,23 @@ const gameBoard = (() => {
 	const addBoardEvents = () => {
 		let boardDiv = document.querySelectorAll(".tile");
 		let divArray = [...boardDiv];
-		divArray.forEach(div => div.addEventListener('click', () => console.log(gameState.turn(div.dataset.index))));
+		divArray.forEach(div => div.addEventListener('click', () => updateGameDisplay(gameState.turn(div.dataset.index))));
 	};
+
+	const removeBoardEvents = () => {
+		let boardDiv = document.querySelectorAll(".tile");
+		let divArray = [...boardDiv];
+		divArray.forEach(div => div.outerHTML = div.outerHTML);
+	};
+
+	const updateGameDisplay = (result) => {
+		let [winner, result_str] = result;
+		if (winner >= 0) {
+			removeBoardEvents();
+		}
+
+		console.log(result_str);
+	}
 
 
 	const getDisplaySign = (index) => index === 0 ? 'X' : 'O'; 
@@ -92,11 +107,11 @@ const gameState = (() => {
 		gameBoard.updateBoard();
 		let winner = gameBoard.checkGameOver();
 		switch (winner) {
-			case -2: return "Game Over. It is a draw.";
+			case -2: return [winner, "Game Over. It is a draw."];
 			case -1:
 				currentPlayer = currentPlayer === 1 ? 0 : 1;
-				return `${players[currentPlayer].getName()}'s turn`;
-			default: return `Game Over. ${players[currentPlayer].getName()} wins!`;
+				return [winner, `${players[currentPlayer].getName()}'s turn`];
+			default: return [winner, `Game Over. ${players[currentPlayer].getName()} wins!`];
 		}
 	};
 

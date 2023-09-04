@@ -51,7 +51,7 @@ const gameBoard = (() => {
 	const addBoardEvents = () => {
 		let boardDiv = document.querySelectorAll(".tile");
 		let divArray = [...boardDiv];
-		divArray.forEach(div => div.addEventListener('click', () => gameState.turn(div.dataset.index)));
+		divArray.forEach(div => div.addEventListener('click', () => console.log(gameState.turn(div.dataset.index))));
 	};
 
 
@@ -77,10 +77,10 @@ const gameState = (() => {
 	const addPlayer = (player) => players.push(player);
 	const start = () => { 
 		while (players.length < 2) {
-			let p = 2 - players.length;
-			addPlayer(playerFactory(`Player ${p}`, p - 1));
+			addPlayer(playerFactory(`Player ${players.length + 1}`, Math.abs(players.length)));
 		}
 
+		console.log(players[0].getName());
 		currentPlayer = 0;
 		gameBoard.addBoardEvents();
 	};
@@ -96,7 +96,7 @@ const gameState = (() => {
 			case -1:
 				currentPlayer = currentPlayer === 1 ? 0 : 1;
 				return `${players[currentPlayer].getName()}'s turn`;
-			case _: return `Game Over. ${players[currentPlayer].getName()} wins!`;
+			default: return `Game Over. ${players[currentPlayer].getName()} wins!`;
 		}
 	};
 

@@ -51,11 +51,11 @@ const gameBoard = (() => {
 	const addBoardEvents = () => {
 		let boardDiv = document.querySelectorAll(".tile");
 		let divArray = [...boardDiv];
-		divArray.forEach(div => div.addEventListener('click', () => play(div.dataset.index)));
+		divArray.forEach(div => div.addEventListener('click', () => gameState.turn(div.dataset.index)));
 	};
 
 
-	const getDisplaySign = (index) => sign === 0 ? 'X' : 'O'; 
+	const getDisplaySign = (index) => index === 0 ? 'X' : 'O'; 
 
 	const updateBoard = () => {
 		// let boardDiv = document.querySelector("#game-board");
@@ -64,7 +64,7 @@ const gameBoard = (() => {
 				continue;
 			}
 			let div = document.querySelector(`[data-index="${i}"]`)
-			div.innerText = getDisplaySign(board[i]); 
+			div.innerHTML = getDisplaySign(board[i]); 
 		}
 	};
 
@@ -78,18 +78,18 @@ const gameState = (() => {
 	const start = () => { 
 		while (players.length < 2) {
 			let p = 2 - players.length;
-			addPlayer(playerFactory(`Player ${p}`, p));
+			addPlayer(playerFactory(`Player ${p}`, p - 1));
 		}
 
 		currentPlayer = 0;
 		gameBoard.addBoardEvents();
-		gameBoard.updateBoard();
 	};
 
 	const turn = (index) => {
-		gameBoard.play(index, players[currentPlayer].getSign());
-		if (index === -1) return;
+		let play = gameBoard.play(index, players[currentPlayer].getSign());
+		if (play === -1) return;
 
+		gameBoard.updateBoard();
 		let winner = gameBoard.checkGameOver();
 		switch (winner) {
 			case -2: return "Game Over. It is a draw.";

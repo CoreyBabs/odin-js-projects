@@ -46,7 +46,11 @@ const gameBoard = (() => {
 		return -1;
 	};
 
-	const reset = () => { board.fill(-1) };
+	const reset = () => { 
+		board.fill(-1);
+		updateBoard();
+		gameState.resetTurnDisplay();
+	};
 
 	const addBoardEvents = () => {
 		let boardDiv = document.querySelectorAll(".tile");
@@ -72,10 +76,11 @@ const gameBoard = (() => {
 	const updateBoard = () => {
 		// let boardDiv = document.querySelector("#game-board");
 		for (let i = 0; i < 9; i++) {
+			let div = document.querySelector(`[data-index="${i}"]`)
 			if (board[i] === -1) {
+				div.innerHTML = "";
 				continue;
 			}
-			let div = document.querySelector(`[data-index="${i}"]`)
 			div.innerHTML = getDisplaySign(board[i]); 
 		}
 	};
@@ -86,16 +91,18 @@ const gameBoard = (() => {
 const gameState = (() => {
 	let players = [];
 	let currentPlayer = 0;
+	let resetTurn = false;
 	const addPlayer = (player) => players.push(player);
 	const start = () => { 
 		while (players.length < 2) {
-			addPlayer(playerFactory(`Player ${players.length + 1}`, Math.abs(players.length)));
+			addPlayer(playerFactory(`Player ${players.length + 1}`, players.length));
 		}
 
-		console.log(players[0].getName());
 		currentPlayer = 0;
 		gameBoard.addBoardEvents();
 		updateTurnDisplay(`${players[currentPlayer].getName()}'s turn`);
+		updateRestartButton();
+		updateResetButton();
 	};
 
 	const turn = (index) => {
@@ -107,12 +114,14 @@ const gameState = (() => {
 		let result = "";
 		switch (winner) {
 			case -2: result = "Game Over. It is a draw."; break;
-			case -1:
-				currentPlayer = currentPlayer === 1 ? 0 : 1;
-				result = `${players[currentPlayer].getName()}'s turn`; break;
+			case -1: result = `${players[currentPlayer].getName()}'s turn`; break;
 			default: result = `Game Over. ${players[currentPlayer].getName()} wins!`; break;
 		}
 
+		currentPlayer = currentPlayer === 1 ? 0 : 1;
+		if (winner >= 0) {
+			resetTurn = true;
+		}
 		updateTurnDisplay(result);
 		return winner;
 	};
@@ -122,12 +131,63 @@ const gameState = (() => {
 		turnDiv.innerHTML = result;
 	} 
 
+	const updateAddButton = () => {
+		let btn = document.querySelector("#add");
+		btn.innerText = "Add Player";
+		btn.removeEventListener("click", reset);
+		btn.addEventListener("click", addNewPlayer);
+	}
+
+	const updateResetButton = () => {
+		let btn = document.querySelector("#add");
+		btn.innerText = "Reset";
+		btn.removeEventListener("click", addNewPlayer);
+		btn.addEventListener("click", reset);
+	}
+
+	const addNewPlayer = () => {
+		let name = prompt("Please enter your name.");
+		if (name === null) return;
+
+		let player = playerFactory(name, players.length);
+		addPlayer(player);
+
+		if (players.length === 2) {
+			updateResetButton();
+		}
+	}
+
+	const updateStartButton = () => {
+		let btn = document.querySelector("#start");
+		btn.innerText = "Start";
+		btn.removeEventListener("click", gameBoard.reset);
+		btn.addEventListener("click", start);
+	}
+	
+	const updateRestartButton = () => {
+		let btn = document.querySelector("#start");
+		btn.innerText = "Restart";
+		btn.removeEventListener("click", start);
+		btn.addEventListener("click", gameBoard.reset);
+	}
+
+	const resetTurnDisplay = () => {
+		if (resetTurn) {
+			updateTurnDisplay(`${players[currentPlayer].getName()}'s turn`);
+			gameBoard.addBoardEvents();
+			resetTurn = false;
+		}
+	}
+
 	const reset = () => {
 		players = []
 		gameBoard.reset();
+		resetTurn = false;
+		updateAddButton();
+		updateStartButton();
 	}
 
-	return {addPlayer, start, turn, reset}
+	return {addPlayer, start, turn, reset, resetTurnDisplay}
 })();
 
-gameState.start();
+gameState.reset();

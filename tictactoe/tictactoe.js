@@ -1,9 +1,8 @@
 const playerFactory = (name, sign) => {
-	let sign = sign;
+	let num_sign = sign;
 	const getName = () => name;
-	const getSign = () => sign; 
-	const getDisplaySign = () => sign === 0 ? 'X' : 'O'; 
-	return {getName, getSign, getDisplaySign}
+	const getSign = () => num_sign; 
+	return {getName, getSign}
 } 
 
 const gameBoard = (() => {
@@ -49,13 +48,33 @@ const gameBoard = (() => {
 
 	const reset = () => { board.fill(-1) };
 
-	return {checkGameOver, play, reset};
+	const addBoardEvents = () => {
+		let boardDiv = document.querySelectorAll(".tile");
+		let divArray = [...boardDiv];
+		divArray.forEach(div => div.addEventListener('click', () => play(div.dataset.index)));
+	};
+
+
+	const getDisplaySign = (index) => sign === 0 ? 'X' : 'O'; 
+
+	const updateBoard = () => {
+		// let boardDiv = document.querySelector("#game-board");
+		for (let i = 0; i < 9; i++) {
+			if (board[i] === -1) {
+				continue;
+			}
+			let div = document.querySelector(`[data-index="${i}"]`)
+			div.innerText = getDisplaySign(board[i]); 
+		}
+	};
+
+	return {checkGameOver, play, reset, addBoardEvents, updateBoard};
 })();
 
-const gameState = () => {
+const gameState = (() => {
 	let players = [];
 	let currentPlayer = 0;
-	const addPlayer = (player) => players.add(player);
+	const addPlayer = (player) => players.push(player);
 	const start = () => { 
 		while (players.length < 2) {
 			let p = 2 - players.length;
@@ -63,6 +82,8 @@ const gameState = () => {
 		}
 
 		currentPlayer = 0;
+		gameBoard.addBoardEvents();
+		gameBoard.updateBoard();
 	};
 
 	const turn = (index) => {
@@ -83,5 +104,8 @@ const gameState = () => {
 		players = []
 		gameBoard.reset();
 	}
+
 	return {addPlayer, start, turn, reset}
-}
+})();
+
+gameState.start();

@@ -1,4 +1,5 @@
 import './styles.css';
+import { displayHome } from './home';
 
 function addHeader() {
   console.log(document.body);
@@ -16,17 +17,18 @@ function addHeader() {
 
   let menu = document.createElement("div"); 
   menu.id = "menu";
-  menu.className = "tab"
+  menu.className = "tab hidden"
   menu.innerText = "Menu";
   header.appendChild(menu);
 
   let contact = document.createElement("div"); 
   contact.id = "contact";
-  contact.className = "tab"
+  contact.className = "tab hidden"
   contact.innerText = "Contact";
   header.appendChild(contact);
 
-  body.appendChild(header);
+  body.prepend(header);
 }
 
 addHeader();
+displayHome();

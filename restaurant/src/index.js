@@ -1,8 +1,8 @@
 import './styles.css';
 import { displayHome } from './home';
+import { displayContacts } from './contact';
 
 function addHeader() {
-  console.log(document.body);
   let body = document.querySelector("body");
   
   let header = document.createElement("div");
@@ -27,8 +27,13 @@ function addHeader() {
   contact.innerText = "Contact";
   header.appendChild(contact);
 
+  let content = document.createElement("div");
+  content.id = "content";
+
   body.prepend(header);
+  body.appendChild(content);
 }
 
 addHeader();
-displayHome();
+// displayHome();
+displayContacts();

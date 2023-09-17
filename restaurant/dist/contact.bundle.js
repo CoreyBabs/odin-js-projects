@@ -1,50 +1,108 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	// The require scope
-/******/ 	var __webpack_require__ = {};
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
+"use strict";
+(self["webpackChunkrestaurant"] = self["webpackChunkrestaurant"] || []).push([["contact"],{
+
+/***/ "./src/contact.js":
 /*!************************!*\
   !*** ./src/contact.js ***!
   \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   displayContacts: () => (/* binding */ displayContacts)
 /* harmony export */ });
+/* harmony import */ var _assets_chef_penguin_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/chef penguin.jpg */ "./src/assets/chef penguin.jpg");
+/* harmony import */ var _assets_duck_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/duck.jpg */ "./src/assets/duck.jpg");
+/* harmony import */ var _assets_akita_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/akita.jpg */ "./src/assets/akita.jpg");
+
+
+
 function displayContacts() {
-  console.log("Hello from contacts");
+  let content = document.querySelector("#content");
+
+  // clear the child nodes
+  content.replaceChildren([]);
+
+  let d1 = createDiv("Corey", _assets_chef_penguin_jpg__WEBPACK_IMPORTED_MODULE_0__, "Chef", "111-123-456", "penguin@penguin.com")
+  let d2 = createDiv("Goose", _assets_duck_jpg__WEBPACK_IMPORTED_MODULE_1__, "Assistant", "111-123-457", "goose@penguin.com")
+  let d3 = createDiv("Bella", _assets_akita_jpg__WEBPACK_IMPORTED_MODULE_2__, "Taste Tester", "111-123-458", "bella@penguin.com")
+
+  content.appendChild(d1);
+  content.appendChild(d2);
+  content.appendChild(d3);
 }
 
-/******/ })()
-;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udGFjdC5idW5kbGUuanMiLCJtYXBwaW5ncyI6Ijs7VUFBQTtVQUNBOzs7OztXQ0RBO1dBQ0E7V0FDQTtXQUNBO1dBQ0EseUNBQXlDLHdDQUF3QztXQUNqRjtXQUNBO1dBQ0E7Ozs7O1dDUEE7Ozs7O1dDQUE7V0FDQTtXQUNBO1dBQ0EsdURBQXVELGlCQUFpQjtXQUN4RTtXQUNBLGdEQUFnRCxhQUFhO1dBQzdEOzs7Ozs7Ozs7Ozs7QUNOTztBQUNQO0FBQ0EiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9yZXN0YXVyYW50L3dlYnBhY2svYm9vdHN0cmFwIiwid2VicGFjazovL3Jlc3RhdXJhbnQvd2VicGFjay9ydW50aW1lL2RlZmluZSBwcm9wZXJ0eSBnZXR0ZXJzIiwid2VicGFjazovL3Jlc3RhdXJhbnQvd2VicGFjay9ydW50aW1lL2hhc093blByb3BlcnR5IHNob3J0aGFuZCIsIndlYnBhY2s6Ly9yZXN0YXVyYW50L3dlYnBhY2svcnVudGltZS9tYWtlIG5hbWVzcGFjZSBvYmplY3QiLCJ3ZWJwYWNrOi8vcmVzdGF1cmFudC8uL3NyYy9jb250YWN0LmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIFRoZSByZXF1aXJlIHNjb3BlXG52YXIgX193ZWJwYWNrX3JlcXVpcmVfXyA9IHt9O1xuXG4iLCIvLyBkZWZpbmUgZ2V0dGVyIGZ1bmN0aW9ucyBmb3IgaGFybW9ueSBleHBvcnRzXG5fX3dlYnBhY2tfcmVxdWlyZV9fLmQgPSAoZXhwb3J0cywgZGVmaW5pdGlvbikgPT4ge1xuXHRmb3IodmFyIGtleSBpbiBkZWZpbml0aW9uKSB7XG5cdFx0aWYoX193ZWJwYWNrX3JlcXVpcmVfXy5vKGRlZmluaXRpb24sIGtleSkgJiYgIV9fd2VicGFja19yZXF1aXJlX18ubyhleHBvcnRzLCBrZXkpKSB7XG5cdFx0XHRPYmplY3QuZGVmaW5lUHJvcGVydHkoZXhwb3J0cywga2V5LCB7IGVudW1lcmFibGU6IHRydWUsIGdldDogZGVmaW5pdGlvbltrZXldIH0pO1xuXHRcdH1cblx0fVxufTsiLCJfX3dlYnBhY2tfcmVxdWlyZV9fLm8gPSAob2JqLCBwcm9wKSA9PiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKG9iaiwgcHJvcCkpIiwiLy8gZGVmaW5lIF9fZXNNb2R1bGUgb24gZXhwb3J0c1xuX193ZWJwYWNrX3JlcXVpcmVfXy5yID0gKGV4cG9ydHMpID0+IHtcblx0aWYodHlwZW9mIFN5bWJvbCAhPT0gJ3VuZGVmaW5lZCcgJiYgU3ltYm9sLnRvU3RyaW5nVGFnKSB7XG5cdFx0T2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsIFN5bWJvbC50b1N0cmluZ1RhZywgeyB2YWx1ZTogJ01vZHVsZScgfSk7XG5cdH1cblx0T2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsICdfX2VzTW9kdWxlJywgeyB2YWx1ZTogdHJ1ZSB9KTtcbn07IiwiZXhwb3J0IGZ1bmN0aW9uIGRpc3BsYXlDb250YWN0cygpIHtcbiAgY29uc29sZS5sb2coXCJIZWxsbyBmcm9tIGNvbnRhY3RzXCIpO1xufVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9
+function createDiv(name, image, role, number, email) {
+  let div = document.createElement("div");
+  div.className = "contact";
+  
+  let h2 = document.createElement("h2");
+  h2.className = "name";
+  h2.innerText = name; 
+
+  let img = new Image();
+  img.src = image;
+  img.className = "image";
+
+  let roleP = document.createElement("p");
+  roleP.className = "role";
+  roleP.innerText = role;
+
+
+  let numP = document.createElement("p");
+  numP.className = "number";
+  numP.innerText = number;
+
+  let emailP = document.createElement("p");
+  emailP.className = "email";
+  emailP.innerText = email;
+
+  div.appendChild(h2);
+  div.appendChild(img);
+  div.appendChild(roleP);
+  div.appendChild(numP);
+  div.appendChild(emailP);
+
+  return div;
+}
+
+
+/***/ }),
+
+/***/ "./src/assets/akita.jpg":
+/*!******************************!*\
+  !*** ./src/assets/akita.jpg ***!
+  \******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "8069c1d4cbfed03d955c.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/chef penguin.jpg":
+/*!*************************************!*\
+  !*** ./src/assets/chef penguin.jpg ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "8dc607ed1f4515c4c550.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/duck.jpg":
+/*!*****************************!*\
+  !*** ./src/assets/duck.jpg ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "03c0587081e6ccfe84bb.jpg";
+
+/***/ })
+
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__("./src/contact.js"));
+/******/ }
+]);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udGFjdC5idW5kbGUuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFnRDtBQUNYO0FBQ0E7QUFDOUI7QUFDUDs7QUFFQTtBQUNBOztBQUVBLDhCQUE4QixxREFBTztBQUNyQyw4QkFBOEIsNkNBQUk7QUFDbEMsOEJBQThCLDhDQUFHOztBQUVqQztBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOzs7QUFHQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQSIsInNvdXJjZXMiOlsid2VicGFjazovL3Jlc3RhdXJhbnQvLi9zcmMvY29udGFjdC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUGVuZ3VpbiBmcm9tICcuL2Fzc2V0cy9jaGVmIHBlbmd1aW4uanBnJztcbmltcG9ydCBEdWNrIGZyb20gJy4vYXNzZXRzL2R1Y2suanBnJztcbmltcG9ydCBEb2cgZnJvbSAnLi9hc3NldHMvYWtpdGEuanBnJztcbmV4cG9ydCBmdW5jdGlvbiBkaXNwbGF5Q29udGFjdHMoKSB7XG4gIGxldCBjb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNjb250ZW50XCIpO1xuXG4gIC8vIGNsZWFyIHRoZSBjaGlsZCBub2Rlc1xuICBjb250ZW50LnJlcGxhY2VDaGlsZHJlbihbXSk7XG5cbiAgbGV0IGQxID0gY3JlYXRlRGl2KFwiQ29yZXlcIiwgUGVuZ3VpbiwgXCJDaGVmXCIsIFwiMTExLTEyMy00NTZcIiwgXCJwZW5ndWluQHBlbmd1aW4uY29tXCIpXG4gIGxldCBkMiA9IGNyZWF0ZURpdihcIkdvb3NlXCIsIER1Y2ssIFwiQXNzaXN0YW50XCIsIFwiMTExLTEyMy00NTdcIiwgXCJnb29zZUBwZW5ndWluLmNvbVwiKVxuICBsZXQgZDMgPSBjcmVhdGVEaXYoXCJCZWxsYVwiLCBEb2csIFwiVGFzdGUgVGVzdGVyXCIsIFwiMTExLTEyMy00NThcIiwgXCJiZWxsYUBwZW5ndWluLmNvbVwiKVxuXG4gIGNvbnRlbnQuYXBwZW5kQ2hpbGQoZDEpO1xuICBjb250ZW50LmFwcGVuZENoaWxkKGQyKTtcbiAgY29udGVudC5hcHBlbmRDaGlsZChkMyk7XG59XG5cbmZ1bmN0aW9uIGNyZWF0ZURpdihuYW1lLCBpbWFnZSwgcm9sZSwgbnVtYmVyLCBlbWFpbCkge1xuICBsZXQgZGl2ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKTtcbiAgZGl2LmNsYXNzTmFtZSA9IFwiY29udGFjdFwiO1xuICBcbiAgbGV0IGgyID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImgyXCIpO1xuICBoMi5jbGFzc05hbWUgPSBcIm5hbWVcIjtcbiAgaDIuaW5uZXJUZXh0ID0gbmFtZTsgXG5cbiAgbGV0IGltZyA9IG5ldyBJbWFnZSgpO1xuICBpbWcuc3JjID0gaW1hZ2U7XG4gIGltZy5jbGFzc05hbWUgPSBcImltYWdlXCI7XG5cbiAgbGV0IHJvbGVQID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInBcIik7XG4gIHJvbGVQLmNsYXNzTmFtZSA9IFwicm9sZVwiO1xuICByb2xlUC5pbm5lclRleHQgPSByb2xlO1xuXG5cbiAgbGV0IG51bVAgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicFwiKTtcbiAgbnVtUC5jbGFzc05hbWUgPSBcIm51bWJlclwiO1xuICBudW1QLmlubmVyVGV4dCA9IG51bWJlcjtcblxuICBsZXQgZW1haWxQID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInBcIik7XG4gIGVtYWlsUC5jbGFzc05hbWUgPSBcImVtYWlsXCI7XG4gIGVtYWlsUC5pbm5lclRleHQgPSBlbWFpbDtcblxuICBkaXYuYXBwZW5kQ2hpbGQoaDIpO1xuICBkaXYuYXBwZW5kQ2hpbGQoaW1nKTtcbiAgZGl2LmFwcGVuZENoaWxkKHJvbGVQKTtcbiAgZGl2LmFwcGVuZENoaWxkKG51bVApO1xuICBkaXYuYXBwZW5kQ2hpbGQoZW1haWxQKTtcblxuICByZXR1cm4gZGl2O1xufVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9

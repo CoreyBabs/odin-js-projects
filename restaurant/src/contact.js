@@ -14,7 +14,6 @@ export function displayContacts() {
   content.appendChild(d1);
   content.appendChild(d2);
   content.appendChild(d3);
-
 }
 
 function createDiv(name, image, role, number, email) {

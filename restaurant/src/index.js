@@ -1,6 +1,7 @@
 import './styles.css';
 import { displayHome } from './home';
 import { displayContacts } from './contact';
+import { displayMenu } from './menu';
 
 function addHeader() {
   let body = document.querySelector("body");
@@ -35,5 +36,6 @@ function addHeader() {
 }
 
 addHeader();
-// displayHome();
-displayContacts();
+displayHome();
+displayMenu();
+//displayContacts();

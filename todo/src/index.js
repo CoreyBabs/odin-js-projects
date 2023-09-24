@@ -27,8 +27,16 @@ function updateProjectSelection(firstLoad) {
 }
 
 function displayFullTodoTable() {
+  clearTodoTable();
   for (let todo of selectedProj.todos) {
     updateTodoTable(todo);
+  }
+}
+
+function clearTodoTable() {
+  let table = document.querySelector("#todo-table");
+  for (let i = 1; i < table.rows.length;) {
+    table.deleteRow(i);
   }
 }
 
@@ -117,7 +125,7 @@ let test2 = new Todo("Test2", "A second test item", "09/19/2023", "2", true);
 
 let proj = new Project("Test Project", [test, test2]);
 
-let today = new Project("Today", [test, test2]);
+let today = new Project("Today", []);
 
 let projects = [today, proj];
 
@@ -128,6 +136,13 @@ addProj.addEventListener("click", () => addNewProject(false));
 
 let addTodo = document.querySelector("#todo-add");
 addTodo.addEventListener("click", addNewTodo);
+
+let selectBox = document.querySelector("#proj-select");
+selectBox.addEventListener("change", () => {
+  let selectBox = document.querySelector("#proj-select");
+  selectedProj = projects[selectBox.selectedIndex];
+  displayFullTodoTable();
+});
 
 let selectedProj = today;
 displayFullTodoTable();

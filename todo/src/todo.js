@@ -6,4 +6,16 @@ export class Todo {
     this.priority = priority;
     this.checked = checked;
   }
+
+  equals(todo) {
+    return this.title === todo.title &&
+      this.description === todo.description &&
+      this.dueDate === todo.dueDate &&
+      this.priority === todo.priority &&
+      this.checked === todo.checked;
+  }
+
+  toggleCheck() {
+    this.checked = !this.checked;
+  }
 }

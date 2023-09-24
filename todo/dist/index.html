@@ -9,7 +9,6 @@
 		<div id="proj-container">
 			<label for="projects">Projects:</label>
 			<select name="projects" id="proj-select">
-				<!-- <option value="today">Today</option> -->
 			</select>
 			<label for="add">Add new project:</label>
 			<input id="new-proj" type="text" name="add">
@@ -18,13 +17,13 @@
 		<div id="add-container">
 			<label for="title">Title:</label>
 			<input id="title" name="title" type="text">
-			<label id="description" for="description">Description:</label>
-			<input type="text">
+			<label for="description">Description:</label>
+			<input id="description" type="text">
 			<label for="date">Due by:</label>
 			<input id="date" name="date" type="date">
 			<label for="priority">Priority:</label>
-			<input id="priority" name="priority" type="number" min="1" max="3">
-			<input id="add-todo" type="button" value="Add Todo">
+			<input id="priority" name="priority" type="number" min="1" max="3" value="1">
+			<input id="todo-add" type="button" value="Add Todo">
 		</div>
 		<div id="container">
 			<table id="todo-table">

@@ -7,3 +7,11 @@ div {
 	margin: 8px;
 	margin-bottom: 16px;
 }
+
+th, td {
+	padding: 10px 20px;
+}
+
+th {
+	background-color: rgb(235,235,235);
+}

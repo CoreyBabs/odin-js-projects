@@ -7,10 +7,10 @@ function updateProjectList() {
     projects.push(today);
   }
 
-  updateProjectSelection();
+  updateProjectSelection(true);
 }
 
-function updateProjectSelection() {
+function updateProjectSelection(firstLoad) {
   let select = document.querySelector("#proj-select");
   select.replaceChildren([]);
   for (let i = 0; i < projects.length; i++) {
@@ -18,10 +18,10 @@ function updateProjectSelection() {
     let opt = document.createElement('option');
     opt.value = proj.nameValue();
     opt.innerHTML = proj.name;
-    if (i === projects.length - 1) {
-    }
     select.appendChild(opt);
-    select.value = proj.nameValue();
+    if (!firstLoad && i === projects.length - 1) {
+      select.value = proj.nameValue();
+    }
   }
 }
 
@@ -49,8 +49,8 @@ let today = new Project("Today", []);
 
 let projects = [today, proj];
 
-updateProjectList();
+updateProjectList(true);
 
 let addProj = document.querySelector("#proj-add");
-addProj.addEventListener("click", addNewProject);
+addProj.addEventListener("click", () => addNewProject(false));
 

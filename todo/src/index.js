@@ -63,6 +63,10 @@ function updateTodoTable(todo) {
   let comp_chk = document.createElement("input");
   comp_chk.setAttribute("type", "checkbox");
   comp_chk.checked = todo.checked;
+  comp_chk.addEventListener("change", () => {
+    todo.toggleCheck();
+    saveToStorage();
+  });
   complete.appendChild(comp_chk);
 
   let del = row.insertCell(5);

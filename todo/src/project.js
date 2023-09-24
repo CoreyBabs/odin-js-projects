@@ -5,4 +5,8 @@ export class Project {
     this.name = name;
     this.todos = todos;
   }
+
+  nameValue() {
+    return this.name.toLowerCase();
+  }
 } 

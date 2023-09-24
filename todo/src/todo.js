@@ -19,3 +19,7 @@ export class Todo {
     this.checked = !this.checked;
   }
 }
+
+export function todoFromJSON(todo) {
+  return new Todo(todo["title"], todo["description"], todo["dueDate"], todo["priority"], todo["checked"]);
+}

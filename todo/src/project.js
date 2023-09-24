@@ -1,4 +1,4 @@
-import { Todo } from "./todo";
+import { todoFromJSON } from "./todo";
 
 export class Project {
   constructor(name, todos) {
@@ -22,3 +22,14 @@ export class Project {
     }
   }
 } 
+
+export function projectFromJSON(project) {
+  let todosJson = project["todos"];
+  console.log(project);
+  let todos = [];
+  for (let todo of todosJson) {
+    todos.push(todoFromJSON(todo));
+  }
+
+  return new Project(project["name"], todos);
+}

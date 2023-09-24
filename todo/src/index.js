@@ -1,10 +1,11 @@
 import './styles.css';
 import { Todo } from './todo';
-import { Project } from './project';
+import { Project, projectFromJSON } from './project';
 
 function updateProjectList() {
+  fromStorage();
   if (projects.length === 0) {
-    projects.push(today);
+    projects.push(new Project("Today", []));
   }
 
   updateProjectSelection(true);
@@ -80,6 +81,7 @@ function addNewProject() {
   let newProj = new Project(title, []);
   projects.push(newProj);
   updateProjectSelection();
+  saveToStorage();
 }
 
 function addNewTodo() {
@@ -106,6 +108,7 @@ function addNewTodo() {
   let newTodo = new Todo(title, des, date, prio, false);
   selectedProj.addTodo(newTodo);
   updateTodoTable(newTodo);
+  saveToStorage();
 }
 
 function getTodoInput(id) {
@@ -117,19 +120,26 @@ function removeTodo(todo, rowIdx) {
   selectedProj.removeTodo(todo);
   let table = document.querySelector("#todo-table");
   table.deleteRow(rowIdx);
+  saveToStorage();
 }
 
-let test = new Todo("Test", "A test item", "09/18/2023", "1", false);
+function saveToStorage() {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
 
-let test2 = new Todo("Test2", "A second test item", "09/19/2023", "2", true);
+function fromStorage() {
+  let storedProjects = JSON.parse(localStorage.getItem("projects"));
+  projects = [];
+  if (!storedProjects) {
+    return;
+  }
 
-let proj = new Project("Test Project", [test, test2]);
+  for (let proj of storedProjects) {
+    projects.push(projectFromJSON(proj));
+  }
+}
 
-let today = new Project("Today", []);
-
-let projects = [today, proj];
-
-updateProjectList(true);
+let projects = [];
 
 let addProj = document.querySelector("#proj-add");
 addProj.addEventListener("click", () => addNewProject(false));
@@ -144,5 +154,6 @@ selectBox.addEventListener("change", () => {
   displayFullTodoTable();
 });
 
-let selectedProj = today;
+updateProjectList();
+let selectedProj = projects[0];
 displayFullTodoTable();
